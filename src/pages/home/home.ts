@@ -28,8 +28,18 @@ export class HomePage {
     return allEntries;
   }
 
+  shuffleArray(array) {
+    for (var i = array.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var temp = array[i];
+      array[i] = array[j];
+      array[j] = temp;
+    }
+    return array;
+  }
+
   pickAWinner (arr) {
-    let entries = this.getAllEntries(arr);
+    let entries: any = this.shuffleArray(this.getAllEntries(arr));
     let todaysWinner = entries[Math.floor(Math.random() * entries.length)];
     return todaysWinner;
   }
