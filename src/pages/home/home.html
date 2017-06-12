@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>New Giveaway</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <div class="section" *ngIf="!showWinner">
+    <!-- Table header -->
+    <ion-row>
+      <ion-col col-10>
+        <strong>Name</strong>
+      </ion-col>
+      <ion-col col-2>
+        <strong>Entries</strong>
+      </ion-col>
+    </ion-row>
+    <!-- Repeat over this row - make it dynamically add rows -->
+    <ion-row *ngFor="let row of rows">
+      <ion-col col-10>
+        <input type="text" [(ngModel)]="row.name">
+      </ion-col>
+      <ion-col col-2>
+        <input type="number" [(ngModel)]="row.entries">
+      </ion-col>
+    </ion-row>
+    <!-- Add Rows -->
+    <button ion-button icon-left color="secondary" (click)="newApplicant()">
+      <ion-icon name="add"></ion-icon>
+      New Applicant
+    </button>
+    <!-- Submit Entries -->
+    <button ion-button icon-left (click)="submit(rows)">
+      <ion-icon name="send"></ion-icon>
+      Submit Applicants
+    </button>
+  </div>
+  <div class="section" *ngIf="showWinner">
+    <h2 class="winner">Winner: <strong>{{winner}}</strong></h2>
+    <!-- Retry -->
+    <button ion-button icon-left color="secondary" (click)="retry()">
+      <ion-icon name="refresh"></ion-icon>
+      Retry
+    </button>
+    <!-- New Giveaway -->
+    <button ion-button icon-left (click)="newGiveaway()">
+      <ion-icon name="list"></ion-icon>
+      New Giveaway
+    </button>
+  </div>
+
+</ion-content>
