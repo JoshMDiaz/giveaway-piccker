@@ -16,4 +16,13 @@ page-home {
   .enter-entries {
     margin-left: 20px;
   }
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2em;
+    h2 {
+      margin: 0;
+    }
+  }
 }

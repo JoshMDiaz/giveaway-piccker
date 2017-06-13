@@ -14,8 +14,9 @@ export class HomePage {
     this.winner = null;
   }
 
-  newApplicant() {
-    this.rows.push({});
+  newApplicant(rows) {
+    this.rows.unshift({});
+    this.checkRows(rows);
   }
 
   getAllEntries(arr) {
@@ -26,6 +27,14 @@ export class HomePage {
       }
     }
     return allEntries;
+  }
+
+  checkRows(rows) {
+    for (let i = 0; i < rows.length; i++) {
+      if (rows[i].name === '' || rows[i].entries === '' || rows[i].name === null || rows[i].entries === null || rows[i].name === undefined || rows[i].entries === undefined) {
+        return true;
+      }
+    }
   }
 
   shuffleArray(array) {

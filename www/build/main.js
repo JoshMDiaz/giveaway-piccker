@@ -55740,8 +55740,9 @@ var HomePage = (function () {
         this.navCtrl = navCtrl;
         this.winner = null;
     }
-    HomePage.prototype.newApplicant = function () {
-        this.rows.push({});
+    HomePage.prototype.newApplicant = function (rows) {
+        this.rows.unshift({});
+        this.checkRows(rows);
     };
     HomePage.prototype.getAllEntries = function (arr) {
         var allEntries = [];
@@ -55751,6 +55752,13 @@ var HomePage = (function () {
             }
         }
         return allEntries;
+    };
+    HomePage.prototype.checkRows = function (rows) {
+        for (var i = 0; i < rows.length; i++) {
+            if (rows[i].name === '' || rows[i].entries === '' || rows[i].name === null || rows[i].entries === null || rows[i].name === undefined || rows[i].entries === undefined) {
+                return true;
+            }
+        }
     };
     HomePage.prototype.shuffleArray = function (array) {
         for (var i = array.length - 1; i > 0; i--) {
@@ -55791,7 +55799,7 @@ var HomePage = (function () {
 }());
 HomePage = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_5" /* Component */])({
-        selector: 'page-home',template:/*ion-inline-start:"/Users/Josh/Development/public_html/giveaway_picker/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>New Giveaway</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <div class="section" *ngIf="!showWinner">\n    <!-- Table header -->\n    <ion-row>\n      <ion-col col-10>\n        <strong>Name</strong>\n      </ion-col>\n      <ion-col col-2>\n        <strong>Entries</strong>\n      </ion-col>\n    </ion-row>\n    <!-- Repeat over this row - make it dynamically add rows -->\n    <ion-row *ngFor="let row of rows">\n      <ion-col col-10>\n        <input type="text" [(ngModel)]="row.name">\n      </ion-col>\n      <ion-col col-2>\n        <input type="number" [(ngModel)]="row.entries">\n      </ion-col>\n    </ion-row>\n    <!-- Add Rows -->\n    <button ion-button icon-left color="secondary" (click)="newApplicant()">\n      <ion-icon name="add"></ion-icon>\n      New Applicant\n    </button>\n    <!-- Submit Entries -->\n    <button ion-button icon-left (click)="submit(rows)">\n      <ion-icon name="send"></ion-icon>\n      Submit Applicants\n    </button>\n  </div>\n  <div class="section" *ngIf="showWinner">\n    <h2 class="winner">Winner: <strong>{{winner}}</strong></h2>\n    <!-- Retry -->\n    <button ion-button icon-left color="secondary" (click)="retry()">\n      <ion-icon name="refresh"></ion-icon>\n      Retry\n    </button>\n    <!-- New Giveaway -->\n    <button ion-button icon-left (click)="newGiveaway()">\n      <ion-icon name="list"></ion-icon>\n      New Giveaway\n    </button>\n  </div>\n\n</ion-content>\n'/*ion-inline-end:"/Users/Josh/Development/public_html/giveaway_picker/src/pages/home/home.html"*/
+        selector: 'page-home',template:/*ion-inline-start:"/Users/Josh/Development/public_html/giveaway_picker/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>New Giveaway</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <div class="section" *ngIf="!showWinner">\n    <!-- Add Rows -->\n    <div class="header">\n      <h2>Applicants: {{rows.length}}</h2>\n      <button ion-button icon-left color="light" (click)="newApplicant(rows)">\n        <ion-icon name="add"></ion-icon>\n        New\n      </button>\n    </div>\n    <!-- Table header -->\n    <ion-row>\n      <ion-col col-10>\n        <strong>Name</strong>\n      </ion-col>\n      <ion-col col-2>\n        <strong>Entries</strong>\n      </ion-col>\n    </ion-row>\n    <!-- Repeat over this row - make it dynamically add rows -->\n    <ion-row *ngFor="let row of rows">\n      <ion-col col-10>\n        <input type="text" [(ngModel)]="row.name">\n      </ion-col>\n      <ion-col col-2>\n        <input type="number" [(ngModel)]="row.entries">\n      </ion-col>\n    </ion-row>\n    <!-- Submit Entries -->\n    <button ion-button icon-left (click)="submit(rows)" [disabled]="checkRows(rows)">\n      <ion-icon name="send"></ion-icon>\n      Pick One!\n    </button>\n  </div>\n  <div class="section" *ngIf="showWinner">\n    <h2 class="winner">Winner: <strong>{{winner}}</strong></h2>\n    <!-- Retry -->\n    <button ion-button icon-left color="secondary" (click)="retry()">\n      <ion-icon name="refresh"></ion-icon>\n      Retry\n    </button>\n    <!-- New Giveaway -->\n    <button ion-button icon-left (click)="newGiveaway()">\n      <ion-icon name="list"></ion-icon>\n      New Giveaway\n    </button>\n  </div>\n\n</ion-content>\n'/*ion-inline-end:"/Users/Josh/Development/public_html/giveaway_picker/src/pages/home/home.html"*/
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */]) === "function" && _a || Object])
 ], HomePage);

@@ -27484,3 +27484,20 @@ page-home .enter-name {
 page-home .enter-entries {
   margin-left: 20px;
 }
+
+page-home .header {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-bottom: 2em;
+}
+
+page-home .header h2 {
+  margin: 0;
+}

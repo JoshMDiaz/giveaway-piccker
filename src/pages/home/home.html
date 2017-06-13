@@ -9,6 +9,14 @@
 
 <ion-content padding>
   <div class="section" *ngIf="!showWinner">
+    <!-- Add Rows -->
+    <div class="header">
+      <h2>Applicants: {{rows.length}}</h2>
+      <button ion-button icon-left color="light" (click)="newApplicant(rows)">
+        <ion-icon name="add"></ion-icon>
+        New
+      </button>
+    </div>
     <!-- Table header -->
     <ion-row>
       <ion-col col-10>
@@ -27,15 +35,10 @@
         <input type="number" [(ngModel)]="row.entries">
       </ion-col>
     </ion-row>
-    <!-- Add Rows -->
-    <button ion-button icon-left color="secondary" (click)="newApplicant()">
-      <ion-icon name="add"></ion-icon>
-      New Applicant
-    </button>
     <!-- Submit Entries -->
-    <button ion-button icon-left (click)="submit(rows)">
+    <button ion-button icon-left (click)="submit(rows)" [disabled]="checkRows(rows)">
       <ion-icon name="send"></ion-icon>
-      Submit Applicants
+      Pick One!
     </button>
   </div>
   <div class="section" *ngIf="showWinner">
