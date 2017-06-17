@@ -25,3 +25,13 @@
   width: calc(100% - 32px);
   text-align: center;
 }
+.toolbar-background {
+  background-color: color($colors, light, base);
+}
+.button-spacer {
+  height: 5px;
+}
+// TODO: Put menu back in when other page is ready
+button.bar-button-menutoggle {
+  display: none;
+}

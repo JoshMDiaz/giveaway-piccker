@@ -29760,6 +29760,18 @@ ion-navbar.toolbar {
   text-align: center;
 }
 
+.toolbar-background {
+  background-color: #e3e3e3;
+}
+
+.button-spacer {
+  height: 5px;
+}
+
+button.bar-button-menutoggle {
+  display: none;
+}
+
 page-home .header {
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -29831,10 +29843,6 @@ page-home .winner h2 span.name {
   text-align: center;
   color: #9ad3de;
   word-break: break-word;
-}
-
-page-home .winner button.retry {
-  margin-bottom: .75em !important;
 }
 
 page-home .spinner-container {
