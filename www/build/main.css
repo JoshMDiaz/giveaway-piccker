@@ -29785,6 +29785,11 @@ page-home ion-item.item {
   padding: 0;
 }
 
+page-home input {
+  border: none !important;
+  box-shadow: none !important;
+}
+
 page-home .winner {
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -29826,4 +29831,31 @@ page-home .winner h2 span.name {
 
 page-home .winner button.retry {
   margin-bottom: .75em !important;
+}
+
+page-home .spinner-container {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  height: 300px;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+page-home .spinner-container ion-spinner * {
+  width: 100px;
+  height: 100px;
+  stroke: #89bdd3 !important;
+  fill: #9ad3de !important;
+}
+
+page-home .spinner-container ion-spinner {
+  position: relative;
+  display: inline-block;
+  width: 100px;
+  height: 100px;
 }

@@ -15,6 +15,10 @@ page-home {
   ion-item.item {
     padding: 0;
   }
+  input {
+    border: none !important;
+    box-shadow: none !important;
+  }
 
   // Winner Section
   .winner {
@@ -40,6 +44,26 @@ page-home {
     }
     button.retry {
       margin-bottom: .75em !important;
+    }
+  }
+
+  // Spinner
+  .spinner-container {
+    display: flex;
+    height: 300px;
+    align-items: center;
+    justify-content: center;
+    ion-spinner * {
+      width: 100px;
+      height: 100px;
+      stroke: color($colors, secondary, base) !important;
+      fill: color($colors, primary, base) !important;
+    }
+    ion-spinner {
+      position: relative;
+      display: inline-block;
+      width: 100px;
+      height: 100px;
     }
   }
 }

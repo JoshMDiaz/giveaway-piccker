@@ -9,6 +9,7 @@ import { NavController } from 'ionic-angular';
 export class HomePage {
   rows: Array<{}>;
   winner: string;
+  loading: boolean;
   showWinner: boolean;
   // giveaways: FirebaseListObservable<any>;
 
@@ -34,6 +35,9 @@ export class HomePage {
   }
 
   checkRows(rows) {
+    if (rows.length === 0) {
+        return true;
+    }
     for (let i = 0; i < rows.length; i++) {
       if (rows[i].name === '' || rows[i].entries === '' || rows[i].name === null || rows[i].entries === null || rows[i].name === undefined || rows[i].entries === undefined) {
         return true;
@@ -58,8 +62,10 @@ export class HomePage {
   }
 
   submit(rows) {
+    this.loading = true;
+    this.winner = this.pickAWinner(rows);
     this.showWinner = true;
-    this.winner = this.pickAWinner (rows);
+    setTimeout(()=>{ this.loading = false }, 750)
   }
 
   remove(i) {
