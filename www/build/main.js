@@ -42940,7 +42940,7 @@ function PanGesture_tsickle_Closure_declarations() {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_53__components_modal_modal_controller__ = __webpack_require__(135);
 /* unused harmony reexport ModalController */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_54__components_nav_nav__ = __webpack_require__(68);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return __WEBPACK_IMPORTED_MODULE_54__components_nav_nav__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return __WEBPACK_IMPORTED_MODULE_54__components_nav_nav__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_55__components_nav_nav_pop__ = __webpack_require__(66);
 /* unused harmony reexport NavPop */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_56__components_nav_nav_pop_anchor__ = __webpack_require__(137);
@@ -43057,7 +43057,7 @@ function PanGesture_tsickle_Closure_declarations() {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_110__platform_dom_controller__ = __webpack_require__(8);
 /* unused harmony reexport DomController */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_111__platform_platform__ = __webpack_require__(3);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return __WEBPACK_IMPORTED_MODULE_111__platform_platform__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return __WEBPACK_IMPORTED_MODULE_111__platform_platform__["a"]; });
 /* unused harmony reexport setupPlatform */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_112__tap_click_haptic__ = __webpack_require__(35);
 /* unused harmony reexport Haptic */
@@ -43070,7 +43070,7 @@ function PanGesture_tsickle_Closure_declarations() {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_116__navigation_nav_controller_base__ = __webpack_require__(45);
 /* unused harmony reexport NavControllerBase */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_117__navigation_nav_params__ = __webpack_require__(15);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return __WEBPACK_IMPORTED_MODULE_117__navigation_nav_params__["a"]; });
+/* unused harmony reexport NavParams */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_118__navigation_nav_util__ = __webpack_require__(21);
 /* unused harmony reexport DeepLinkMetadata */
 /* unused harmony reexport DeepLinkMetadataFactory */
@@ -55735,9 +55735,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+// import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 var HomePage = (function () {
+    // giveaways: FirebaseListObservable<any>;
     function HomePage(navCtrl) {
         this.navCtrl = navCtrl;
+        // constructor(public navCtrl: NavController, af: AngularFireDatabase) {
+        // this.giveaways = af.list('/giveaways');
         this.winner = null;
     }
     HomePage.prototype.newApplicant = function (rows) {
@@ -55778,6 +55782,9 @@ var HomePage = (function () {
         this.showWinner = true;
         this.winner = this.pickAWinner(rows);
     };
+    HomePage.prototype.remove = function (i) {
+        this.rows.splice(i, 1);
+    };
     HomePage.prototype.newGiveaway = function () {
         this.showWinner = false;
         this.rows = [{
@@ -55788,6 +55795,20 @@ var HomePage = (function () {
     HomePage.prototype.retry = function () {
         this.showWinner = false;
     };
+    HomePage.prototype.increaseEntry = function (row) {
+        row.entries++;
+    };
+    HomePage.prototype.decreaseEntry = function (row) {
+        if (row.entries > 0) {
+            row.entries--;
+        }
+    };
+    // saveGiveaway(rows) {
+    //   this.giveaways.push({
+    //     name: rows.name,
+    //     entries: rows.entries
+    //   })
+    // }
     HomePage.prototype.ngOnInit = function () {
         this.rows = [{
                 name: '',
@@ -55799,7 +55820,7 @@ var HomePage = (function () {
 }());
 HomePage = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_5" /* Component */])({
-        selector: 'page-home',template:/*ion-inline-start:"/Users/Josh/Development/public_html/giveaway_picker/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>New Giveaway</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <div class="section" *ngIf="!showWinner">\n    <!-- Add Rows -->\n    <div class="header">\n      <h2>Applicants: {{rows.length}}</h2>\n      <button ion-button icon-left color="light" (click)="newApplicant(rows)">\n        <ion-icon name="add"></ion-icon>\n        New\n      </button>\n    </div>\n    <!-- Table header -->\n    <ion-row>\n      <ion-col col-10>\n        <strong>Name</strong>\n      </ion-col>\n      <ion-col col-2>\n        <strong>Entries</strong>\n      </ion-col>\n    </ion-row>\n    <!-- Repeat over this row - make it dynamically add rows -->\n    <ion-row *ngFor="let row of rows">\n      <ion-col col-10>\n        <input type="text" [(ngModel)]="row.name">\n      </ion-col>\n      <ion-col col-2>\n        <input type="number" [(ngModel)]="row.entries">\n      </ion-col>\n    </ion-row>\n    <!-- Submit Entries -->\n    <button ion-button icon-left (click)="submit(rows)" [disabled]="checkRows(rows)">\n      <ion-icon name="send"></ion-icon>\n      Pick One!\n    </button>\n  </div>\n  <div class="section" *ngIf="showWinner">\n    <h2 class="winner">Winner: <strong>{{winner}}</strong></h2>\n    <!-- Retry -->\n    <button ion-button icon-left color="secondary" (click)="retry()">\n      <ion-icon name="refresh"></ion-icon>\n      Retry\n    </button>\n    <!-- New Giveaway -->\n    <button ion-button icon-left (click)="newGiveaway()">\n      <ion-icon name="list"></ion-icon>\n      New Giveaway\n    </button>\n  </div>\n\n</ion-content>\n'/*ion-inline-end:"/Users/Josh/Development/public_html/giveaway_picker/src/pages/home/home.html"*/
+        selector: 'page-home',template:/*ion-inline-start:"/Users/Josh/Development/public_html/giveaway_picker/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>New Giveaway</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <div class="section" *ngIf="!showWinner">\n    <!-- Add Rows -->\n    <div class="header">\n      <h2>Applicants: {{rows.length}}</h2>\n      <div>\n        <button ion-button color="secondary" (click)="newApplicant(rows)">\n          <ion-icon name="add"></ion-icon>\n        </button>\n      </div>\n    </div>\n\n    <ion-list>\n      <ion-item-sliding *ngFor="let row of rows; let i = index">\n        <ion-item>\n          <ion-row>\n            <ion-col col-3>\n              <input type="number" [(ngModel)]="row.entries" placeholder="Entries">\n            </ion-col>\n            <ion-col col-9>\n              <input type="text" [(ngModel)]="row.name" placeholder="Name">\n            </ion-col>\n          </ion-row>\n        </ion-item>\n        <ion-item-options side="left">\n          <button ion-button color="primary" (click)="increaseEntry(row)">\n            <ion-icon name="add"></ion-icon>\n            Add\n          </button>\n          <button ion-button color="light" (click)="decreaseEntry(row)">\n            <ion-icon name="remove"></ion-icon>\n            Subtract\n          </button>\n        </ion-item-options>\n        <ion-item-options side="right">\n          <button ion-button color="danger" (click)="remove(i)">\n            <ion-icon name="trash"></ion-icon>\n            Remove\n          </button>\n        </ion-item-options>\n      </ion-item-sliding>\n    </ion-list>\n\n    <!-- Submit Entries -->\n    <button ion-button icon-left full (click)="submit(rows)" [disabled]="checkRows(rows)">\n      <ion-icon name="send"></ion-icon>\n      Pick One!\n    </button>\n  </div>\n  <div class="section" *ngIf="showWinner">\n    <!-- Save Giveaway -->\n    <button ion-button icon-left float-right color="secondary" (click)="saveGiveaway(rows)" *ngIf="false">\n      <ion-icon name="download"></ion-icon>\n      Save Giveaway\n    </button>\n    <div class="winner">\n      <h2>Winner: <span class="name">{{winner || \'Sorry!\'}}</span></h2>\n    </div>\n    <div class="sticky-footer">\n      <!-- Retry -->\n      <button class="retry" ion-button icon-left full color="light" (click)="retry()">\n        <ion-icon name="refresh"></ion-icon>\n        Retry\n      </button>\n      <!-- New Giveaway -->\n      <button ion-button class="new-giveaway" icon-left full (click)="newGiveaway()">\n        <ion-icon name="list"></ion-icon>\n        New Giveaway\n      </button>\n    </div>\n  </div>\n\n</ion-content>\n'/*ion-inline-end:"/Users/Josh/Development/public_html/giveaway_picker/src/pages/home/home.html"*/
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */]) === "function" && _a || Object])
 ], HomePage);
@@ -55826,40 +55847,37 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-var ViewGiveawaysPage = ViewGiveawaysPage_1 = (function () {
-    function ViewGiveawaysPage(navCtrl, navParams) {
+// import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+var ViewGiveawaysPage = (function () {
+    // items: Array<{title: string, note: string, icon: string}>;
+    // giveaways: FirebaseListObservable<any>;
+    function ViewGiveawaysPage(navCtrl) {
         this.navCtrl = navCtrl;
-        this.navParams = navParams;
-        // If we navigated to this page, we will have an item available as a nav param
-        this.selectedItem = navParams.get('item');
-        // Let's populate this page with some filler content for funzies
-        this.icons = ['flask', 'wifi', 'beer', 'football', 'basketball', 'paper-plane',
-            'american-football', 'boat', 'bluetooth', 'build'];
-        this.items = [];
-        for (var i = 1; i < 11; i++) {
-            this.items.push({
-                title: 'Item ' + i,
-                note: 'This is item #' + i,
-                icon: this.icons[Math.floor(Math.random() * this.icons.length)]
-            });
-        }
+        // // If we navigated to this page, we will have an item available as a nav param
+        // this.selectedItem = navParams.get('item');
+        //
+        // // Let's populate this page with some filler content for funzies
+        // this.icons = ['flask', 'wifi', 'beer', 'football', 'basketball', 'paper-plane',
+        // 'american-football', 'boat', 'bluetooth', 'build'];
+        //
+        // this.items = [];
+        // for (let i = 1; i < 11; i++) {
+        //   this.items.push({
+        //     title: 'Item ' + i,
+        //     note: 'This is item #' + i,
+        //     icon: this.icons[Math.floor(Math.random() * this.icons.length)]
+        //   });
+        // }
     }
-    ViewGiveawaysPage.prototype.itemTapped = function (event, item) {
-        // That's right, we're pushing to ourselves!
-        this.navCtrl.push(ViewGiveawaysPage_1, {
-            item: item
-        });
-    };
     return ViewGiveawaysPage;
 }());
-ViewGiveawaysPage = ViewGiveawaysPage_1 = __decorate([
+ViewGiveawaysPage = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_5" /* Component */])({
-        selector: 'page-list',template:/*ion-inline-start:"/Users/Josh/Development/public_html/giveaway_picker/src/pages/view-giveaways/view-giveaways.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>List</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n  <ion-list>\n    <button ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">\n      <ion-icon [name]="item.icon" item-left></ion-icon>\n      {{item.title}}\n      <div class="item-note" item-right>\n        {{item.note}}\n      </div>\n    </button>\n  </ion-list>\n  <div *ngIf="selectedItem" padding>\n    You navigated here from <b>{{selectedItem.title}}</b>\n  </div>\n</ion-content>\n'/*ion-inline-end:"/Users/Josh/Development/public_html/giveaway_picker/src/pages/view-giveaways/view-giveaways.html"*/
+        selector: 'page-list',template:/*ion-inline-start:"/Users/Josh/Development/public_html/giveaway_picker/src/pages/view-giveaways/view-giveaways.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>List</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n  <ion-list>\n    <button ion-item *ngFor="let giveaway of giveaways | async">\n      {{item.date}}\n    </button>\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"/Users/Josh/Development/public_html/giveaway_picker/src/pages/view-giveaways/view-giveaways.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavParams */]])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */]])
 ], ViewGiveawaysPage);
 
-var ViewGiveawaysPage_1;
 //# sourceMappingURL=view-giveaways.js.map
 
 /***/ }),
@@ -74423,6 +74441,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+// // Import the AF2 Module
+// import { AngularFireModule } from 'angularfire2';
+// import { AngularFireDatabaseModule } from 'angularfire2/database';
+// import { AngularFireAuthModule } from 'angularfire2/auth';
+//
+// // AF2 Settings
+// export const firebaseConfig = {
+//   apiKey: "AIzaSyDiDrPDdbNEx7pCVzYGDP2GTlFZHx0YYdI",
+//   authDomain: "giveaway-picker.firebaseapp.com",
+//   databaseURL: "https://giveaway-picker.firebaseio.com",
+//   projectId: "giveaway-picker",
+//   storageBucket: "giveaway-picker.appspot.com",
+//   messagingSenderId: "74071981421"
+// };
 var AppModule = (function () {
     function AppModule() {
     }
@@ -74698,13 +74730,13 @@ var MyApp = (function () {
     return MyApp;
 }());
 __decorate([
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_9" /* ViewChild */])(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Nav */]),
-    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Nav */])
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_9" /* ViewChild */])(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Nav */]),
+    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Nav */])
 ], MyApp.prototype, "nav", void 0);
 MyApp = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_5" /* Component */])({template:/*ion-inline-start:"/Users/Josh/Development/public_html/giveaway_picker/src/app/app.html"*/'<ion-menu [content]="content">\n  <ion-header>\n    <ion-toolbar>\n      <ion-title>Menu</ion-title>\n    </ion-toolbar>\n  </ion-header>\n\n  <ion-content>\n    <ion-list>\n      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">\n        {{p.title}}\n      </button>\n    </ion-list>\n  </ion-content>\n\n</ion-menu>\n\n<!-- Disable swipe-to-go-back because it\'s poor UX to combine STGB with side menus -->\n<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>'/*ion-inline-end:"/Users/Josh/Development/public_html/giveaway_picker/src/app/app.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]])
 ], MyApp);
 
 //# sourceMappingURL=app.component.js.map

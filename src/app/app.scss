@@ -19,3 +19,9 @@
   max-width: 700px;
   margin: auto;
 }
+.sticky-footer {
+  position: absolute;
+  bottom: 20px;
+  width: calc(100% - 32px);
+  text-align: center;
+}

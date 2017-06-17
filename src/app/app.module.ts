@@ -9,6 +9,21 @@ import { ViewGiveawaysPage } from '../pages/view-giveaways/view-giveaways';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
+// // Import the AF2 Module
+// import { AngularFireModule } from 'angularfire2';
+// import { AngularFireDatabaseModule } from 'angularfire2/database';
+// import { AngularFireAuthModule } from 'angularfire2/auth';
+//
+// // AF2 Settings
+// export const firebaseConfig = {
+//   apiKey: "AIzaSyDiDrPDdbNEx7pCVzYGDP2GTlFZHx0YYdI",
+//   authDomain: "giveaway-picker.firebaseapp.com",
+//   databaseURL: "https://giveaway-picker.firebaseio.com",
+//   projectId: "giveaway-picker",
+//   storageBucket: "giveaway-picker.appspot.com",
+//   messagingSenderId: "74071981421"
+// };
+
 @NgModule({
   declarations: [
     MyApp,
@@ -18,6 +33,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
+    // AngularFireModule.initializeApp(firebaseConfig),
+    // AngularFireDatabaseModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

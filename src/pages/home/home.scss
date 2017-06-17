@@ -1,21 +1,5 @@
 page-home {
-  .entry-row {
-    padding: 1em 0;
-    display: flex;
-  }
-  input {
-    width: 100%;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    margin: 0.3em 0;
-    padding: .5em;
-  }
-  .enter-name {
-    flex: 1;
-  }
-  .enter-entries {
-    margin-left: 20px;
-  }
+  // Entry Section
   .header {
     display: flex;
     justify-content: space-between;
@@ -23,6 +7,39 @@ page-home {
     margin-bottom: 2em;
     h2 {
       margin: 0;
+    }
+  }
+  ion-item-options button {
+    width: 80px;
+  }
+  ion-item.item {
+    padding: 0;
+  }
+
+  // Winner Section
+  .winner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60vh;
+    h2 {
+      color: color($colors, dark, base);
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      font-size: 48px;
+      align-items: center;
+      flex-wrap: wrap;
+      span.name {
+        font-size: 60px;
+        width: 100%;
+        text-align: center;
+        color: color($colors, primary, base);
+        word-break: break-word;
+      }
+    }
+    button.retry {
+      margin-bottom: .75em !important;
     }
   }
 }

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+// import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 
 @Component({
   selector: 'page-home',
@@ -9,8 +10,11 @@ export class HomePage {
   rows: Array<{}>;
   winner: string;
   showWinner: boolean;
+  // giveaways: FirebaseListObservable<any>;
 
   constructor(public navCtrl: NavController) {
+    // constructor(public navCtrl: NavController, af: AngularFireDatabase) {
+    // this.giveaways = af.list('/giveaways');
     this.winner = null;
   }
 
@@ -58,6 +62,10 @@ export class HomePage {
     this.winner = this.pickAWinner (rows);
   }
 
+  remove(i) {
+    this.rows.splice(i, 1);
+  }
+
   newGiveaway() {
     this.showWinner = false;
     this.rows = [{
@@ -69,6 +77,24 @@ export class HomePage {
   retry() {
     this.showWinner = false;
   }
+
+  increaseEntry(row) {
+    row.entries ++;
+  }
+
+  decreaseEntry(row) {
+    if (row.entries > 0) {
+      row.entries --;
+    }
+  }
+
+
+  // saveGiveaway(rows) {
+  //   this.giveaways.push({
+  //     name: rows.name,
+  //     entries: rows.entries
+  //   })
+  // }
 
   ngOnInit() {
     this.rows = [{

@@ -12,47 +12,71 @@
     <!-- Add Rows -->
     <div class="header">
       <h2>Applicants: {{rows.length}}</h2>
-      <button ion-button icon-left color="light" (click)="newApplicant(rows)">
-        <ion-icon name="add"></ion-icon>
-        New
-      </button>
+      <div>
+        <button ion-button color="secondary" (click)="newApplicant(rows)">
+          <ion-icon name="add"></ion-icon>
+        </button>
+      </div>
     </div>
-    <!-- Table header -->
-    <ion-row>
-      <ion-col col-10>
-        <strong>Name</strong>
-      </ion-col>
-      <ion-col col-2>
-        <strong>Entries</strong>
-      </ion-col>
-    </ion-row>
-    <!-- Repeat over this row - make it dynamically add rows -->
-    <ion-row *ngFor="let row of rows">
-      <ion-col col-10>
-        <input type="text" [(ngModel)]="row.name">
-      </ion-col>
-      <ion-col col-2>
-        <input type="number" [(ngModel)]="row.entries">
-      </ion-col>
-    </ion-row>
+
+    <ion-list>
+      <ion-item-sliding *ngFor="let row of rows; let i = index">
+        <ion-item>
+          <ion-row>
+            <ion-col col-3>
+              <input type="number" [(ngModel)]="row.entries" placeholder="Entries">
+            </ion-col>
+            <ion-col col-9>
+              <input type="text" [(ngModel)]="row.name" placeholder="Name">
+            </ion-col>
+          </ion-row>
+        </ion-item>
+        <ion-item-options side="left">
+          <button ion-button color="primary" (click)="increaseEntry(row)">
+            <ion-icon name="add"></ion-icon>
+            Add
+          </button>
+          <button ion-button color="light" (click)="decreaseEntry(row)">
+            <ion-icon name="remove"></ion-icon>
+            Subtract
+          </button>
+        </ion-item-options>
+        <ion-item-options side="right">
+          <button ion-button color="danger" (click)="remove(i)">
+            <ion-icon name="trash"></ion-icon>
+            Remove
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+
     <!-- Submit Entries -->
-    <button ion-button icon-left (click)="submit(rows)" [disabled]="checkRows(rows)">
+    <button ion-button icon-left full (click)="submit(rows)" [disabled]="checkRows(rows)">
       <ion-icon name="send"></ion-icon>
       Pick One!
     </button>
   </div>
   <div class="section" *ngIf="showWinner">
-    <h2 class="winner">Winner: <strong>{{winner}}</strong></h2>
-    <!-- Retry -->
-    <button ion-button icon-left color="secondary" (click)="retry()">
-      <ion-icon name="refresh"></ion-icon>
-      Retry
+    <!-- Save Giveaway -->
+    <button ion-button icon-left float-right color="secondary" (click)="saveGiveaway(rows)" *ngIf="false">
+      <ion-icon name="download"></ion-icon>
+      Save Giveaway
     </button>
-    <!-- New Giveaway -->
-    <button ion-button icon-left (click)="newGiveaway()">
-      <ion-icon name="list"></ion-icon>
-      New Giveaway
-    </button>
+    <div class="winner">
+      <h2>Winner: <span class="name">{{winner || 'Sorry!'}}</span></h2>
+    </div>
+    <div class="sticky-footer">
+      <!-- Retry -->
+      <button class="retry" ion-button icon-left full color="light" (click)="retry()">
+        <ion-icon name="refresh"></ion-icon>
+        Retry
+      </button>
+      <!-- New Giveaway -->
+      <button ion-button class="new-giveaway" icon-left full (click)="newGiveaway()">
+        <ion-icon name="list"></ion-icon>
+        New Giveaway
+      </button>
+    </div>
   </div>
 
 </ion-content>
