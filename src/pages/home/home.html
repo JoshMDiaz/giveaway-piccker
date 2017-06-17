@@ -28,10 +28,10 @@
         <ion-item>
           <ion-row>
             <ion-col col-4>
-              <input type="number" [(ngModel)]="row.entries" placeholder="Entries">
+              <input type="number" [(ngModel)]="row.entries" placeholder="Entries" (change)="newApplicant(rows)">
             </ion-col>
             <ion-col col-8>
-              <input type="text" [(ngModel)]="row.name" placeholder="Name">
+              <input type="text" [(ngModel)]="row.name" placeholder="Name" (change)="newApplicant(rows)">
             </ion-col>
           </ion-row>
         </ion-item>
@@ -55,10 +55,12 @@
     </ion-list>
 
     <!-- Submit Entries -->
-    <button ion-button icon-left full (click)="submit(rows)" [disabled]="checkRows(rows)">
-      <ion-icon name="send"></ion-icon>
-      Pick One!
-    </button>
+    <div class="sticky-footer">
+      <button ion-button icon-left full (click)="submit(rows)" [disabled]="checkRows(rows)">
+        <ion-icon name="send"></ion-icon>
+        Pick One!
+      </button>
+    </div>
   </div>
   <div class="section" *ngIf="showWinner && !loading">
     <!-- Save Giveaway -->

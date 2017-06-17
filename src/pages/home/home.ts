@@ -20,8 +20,9 @@ export class HomePage {
   }
 
   newApplicant(rows) {
-    this.rows.unshift({});
-    this.checkRows(rows);
+    if (this.checkRows(rows)) {
+      rows.push({});
+    }
   }
 
   getAllEntries(arr) {
@@ -39,7 +40,7 @@ export class HomePage {
         return true;
     }
     for (let i = 0; i < rows.length; i++) {
-      if (rows[i].name === '' || rows[i].entries === '' || rows[i].name === null || rows[i].entries === null || rows[i].name === undefined || rows[i].entries === undefined) {
+      if ((rows[i].name !== '' && rows[i].entries === '') || (rows[i].name === '' && rows[i].entries !== '') || (rows[i].name === null && rows[i].entries !== null) || (rows[i].name !== null && rows[i].entries === null) || (rows[i].name === undefined && rows[i].entries !== undefined) || (rows[i].name !== undefined && rows[i].entries === undefined)) {
         return true;
       }
     }
@@ -65,7 +66,7 @@ export class HomePage {
     this.loading = true;
     this.winner = this.pickAWinner(rows);
     this.showWinner = true;
-    setTimeout(()=>{ this.loading = false }, 750)
+    setTimeout(()=>{ this.loading = false }, 2000)
   }
 
   remove(i) {
