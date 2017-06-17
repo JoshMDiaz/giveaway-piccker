@@ -19,6 +19,9 @@ page-home {
     border: none !important;
     box-shadow: none !important;
   }
+  ion-col.col {
+    overflow: hidden;
+  }
 
   // Winner Section
   .winner {

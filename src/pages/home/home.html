@@ -8,28 +8,29 @@
 </ion-header>
 
 <ion-content padding>
+  <!-- Spinner -->
   <div class="spinner-container" *ngIf="loading">
     <ion-spinner></ion-spinner>
   </div>
+
   <div class="section" *ngIf="!showWinner && !loading">
-    <!-- Add Rows -->
     <div class="header">
-      <h2>Applicants: {{rows.length}}</h2>
-      <div>
-        <button ion-button color="secondary" (click)="newApplicant(rows)">
-          <ion-icon name="add"></ion-icon>
-        </button>
-      </div>
+      <h2>Participants: {{rows.length}}</h2>
+      <!-- Add Rows -->
+      <button ion-button color="secondary" (click)="newApplicant(rows)">
+        <ion-icon name="add"></ion-icon>
+      </button>
     </div>
 
+    <!-- Enter Applicants -->
     <ion-list>
       <ion-item-sliding *ngFor="let row of rows; let i = index">
         <ion-item>
           <ion-row>
-            <ion-col col-3>
+            <ion-col col-4>
               <input type="number" [(ngModel)]="row.entries" placeholder="Entries">
             </ion-col>
-            <ion-col col-9>
+            <ion-col col-8>
               <input type="text" [(ngModel)]="row.name" placeholder="Name">
             </ion-col>
           </ion-row>
@@ -81,5 +82,4 @@
       </button>
     </div>
   </div>
-
 </ion-content>

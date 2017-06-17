@@ -29790,6 +29790,10 @@ page-home input {
   box-shadow: none !important;
 }
 
+page-home ion-col.col {
+  overflow: hidden;
+}
+
 page-home .winner {
   display: -webkit-flex;
   display: -ms-flexbox;
