@@ -1,4 +1,8 @@
 page-home {
+  .section {
+    position: relative;
+    height: calc(100vh - 100px);
+  }
   // Entry Section
   .header {
     display: flex;
