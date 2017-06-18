@@ -96,6 +96,15 @@ export class HomePage {
     }
   }
 
+  checkParticipants(rows) {
+    let applicantLength = 0;
+    for (let i = 0; i < rows.length; i++) {
+      if (rows[i].name !== null && rows[i].entries !== null && rows[i].name !== undefined && rows[i].entries !== undefined && rows[i].name !== '' && rows[i].entries !== '') {
+        applicantLength++;
+      }
+    }
+    return applicantLength;
+  }
 
   // saveGiveaway(rows) {
   //   this.giveaways.push({

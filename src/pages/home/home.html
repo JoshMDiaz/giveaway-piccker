@@ -15,7 +15,7 @@
 
   <div class="section" *ngIf="!showWinner && !loading">
     <div class="header">
-      <h2>Participants: {{rows.length}}</h2>
+      <h2>Participants: {{checkParticipants(rows)}}</h2>
       <!-- Add Rows -->
       <button ion-button color="secondary" (click)="newApplicant(rows)">
         <ion-icon name="add"></ion-icon>
