@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { SplashScreen } from '@ionic-native/splash-screen';
 // import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 
 @Component({
@@ -13,7 +14,7 @@ export class HomePage {
   showWinner: boolean;
   // giveaways: FirebaseListObservable<any>;
 
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, private splashScreen: SplashScreen) {
     // constructor(public navCtrl: NavController, af: AngularFireDatabase) {
     // this.giveaways = af.list('/giveaways');
     this.winner = null;
@@ -37,7 +38,7 @@ export class HomePage {
 
   checkRows(rows) {
     if (rows.length === 0) {
-        return true;
+      return true;
     }
     for (let i = 0; i < rows.length; i++) {
       if ((rows[i].name !== '' && rows[i].entries === '') || (rows[i].name === '' && rows[i].entries !== '') || (rows[i].name === null && rows[i].entries !== null) || (rows[i].name !== null && rows[i].entries === null) || (rows[i].name === undefined && rows[i].entries !== undefined) || (rows[i].name !== undefined && rows[i].entries === undefined)) {
@@ -109,6 +110,8 @@ export class HomePage {
       entries: ''
     }];
     this.showWinner = false;
+    this.splashScreen.show();
+    setTimeout(()=>{ this.splashScreen.hide(); }, 5000)
   }
 
 }
