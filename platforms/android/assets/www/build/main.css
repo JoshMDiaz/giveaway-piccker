@@ -29753,6 +29753,10 @@ h1, h2, h3, h4, h5, h6, p, button, span, div {
   font-family: 'Oswald', sans-serif !important;
 }
 
+h1, h2, h3, h4, h5, h6, p, div {
+  color: #555;
+}
+
 .section {
   max-width: 700px;
   margin: auto;
@@ -29761,7 +29765,7 @@ h1, h2, h3, h4, h5, h6, p, button, span, div {
 .sticky-footer {
   position: absolute;
   bottom: 20px;
-  width: calc(100% - 32px);
+  width: 100%;
   text-align: center;
 }
 
@@ -29771,6 +29775,11 @@ h1, h2, h3, h4, h5, h6, p, button, span, div {
 
 button.bar-button-menutoggle {
   display: none;
+}
+
+page-home .section {
+  position: relative;
+  height: calc(100vh - 100px);
 }
 
 page-home .header {
