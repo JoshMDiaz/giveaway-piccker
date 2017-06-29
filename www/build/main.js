@@ -44922,7 +44922,8 @@ SplashScreen = __decorate([
         pluginName: 'SplashScreen',
         plugin: 'cordova-plugin-splashscreen',
         pluginRef: 'navigator.splashscreen',
-        repo: 'https://github.com/apache/cordova-plugin-splashscreen'
+        repo: 'https://github.com/apache/cordova-plugin-splashscreen',
+        platforms: ['Amazon Fire OS', 'Android', 'BlackBerry 10', 'iOS', 'Tizen', 'Ubuntu', 'Windows', 'Windows Phone']
     })
 ], SplashScreen);
 
@@ -55840,7 +55841,7 @@ var HomePage = (function () {
         this.winner = null;
     }
     HomePage.prototype.newApplicant = function (rows) {
-        if (this.checkRows(rows)) {
+        if (!this.checkRows(rows)) {
             rows.push({});
         }
     };
@@ -55854,11 +55855,15 @@ var HomePage = (function () {
         return allEntries;
     };
     HomePage.prototype.checkRows = function (rows) {
-        if (rows.length === 0) {
-            return true;
-        }
         for (var i = 0; i < rows.length; i++) {
-            if ((rows[i].name !== '' && rows[i].entries === '') || (rows[i].name === '' && rows[i].entries !== '') || (rows[i].name === null && rows[i].entries !== null) || (rows[i].name !== null && rows[i].entries === null) || (rows[i].name === undefined && rows[i].entries !== undefined) || (rows[i].name !== undefined && rows[i].entries === undefined)) {
+            if (rows[i].name === '' || rows[i].entries === '' || rows[i].name === null || rows[i].entries === null || rows[i].name === undefined || rows[i].entries === undefined) {
+                return true;
+            }
+        }
+    };
+    HomePage.prototype.checkValid = function (rows) {
+        for (var i = 0; i < rows.length; i++) {
+            if ((rows[i].name === '' && rows[i].entries !== '') || (rows[i].name === null && rows[i].entries !== null) || (rows[i].name === undefined && rows[i].entries !== undefined) || (rows[i].name !== '' && rows[i].entries === '') || (rows[i].name !== null && rows[i].entries === null) || (rows[i].name !== undefined && rows[i].entries === undefined)) {
                 return true;
             }
         }
@@ -55934,11 +55939,12 @@ var HomePage = (function () {
 }());
 HomePage = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_5" /* Component */])({
-        selector: 'page-home',template:/*ion-inline-start:"/Users/Josh/Development/public_html/giveaway_picker/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Giveaway Picker</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <!-- Spinner -->\n  <div class="spinner-container" *ngIf="loading">\n    <ion-spinner></ion-spinner>\n  </div>\n\n  <div class="section" *ngIf="!showWinner && !loading">\n    <div class="header">\n      <h2>Participants: {{checkParticipants(rows)}}</h2>\n      <!-- Add Rows -->\n      <button ion-button color="secondary" (click)="newApplicant(rows)">\n        <ion-icon name="add"></ion-icon>\n      </button>\n    </div>\n\n    <!-- Enter Applicants -->\n    <ion-list>\n      <ion-item-sliding *ngFor="let row of rows; let i = index">\n        <ion-item>\n          <ion-row>\n            <ion-col col-4>\n              <input type="number" [(ngModel)]="row.entries" placeholder="Entries" (change)="newApplicant(rows)">\n            </ion-col>\n            <ion-col col-8>\n              <input type="text" [(ngModel)]="row.name" placeholder="Name" (change)="newApplicant(rows)">\n            </ion-col>\n          </ion-row>\n        </ion-item>\n        <ion-item-options side="left">\n          <button ion-button color="primary" (click)="increaseEntry(row)">\n            <ion-icon name="add"></ion-icon>\n            Add\n          </button>\n          <button ion-button color="light" (click)="decreaseEntry(row)">\n            <ion-icon name="remove"></ion-icon>\n            Subtract\n          </button>\n        </ion-item-options>\n        <ion-item-options side="right">\n          <button ion-button color="danger" (click)="remove(i)">\n            <ion-icon name="trash"></ion-icon>\n            Remove\n          </button>\n        </ion-item-options>\n      </ion-item-sliding>\n    </ion-list>\n\n    <!-- Submit Entries -->\n    <!-- <div class="sticky-footer"> -->\n      <button ion-button icon-left full (click)="submit(rows)" [disabled]="checkRows(rows)">\n        <ion-icon name="send"></ion-icon>\n        Pick One!\n      </button>\n    <!-- </div> -->\n  </div>\n  <div class="section" *ngIf="showWinner && !loading">\n    <!-- Save Giveaway -->\n    <button ion-button icon-left float-right color="secondary" (click)="saveGiveaway(rows)" *ngIf="false">\n      <ion-icon name="download"></ion-icon>\n      Save Giveaway\n    </button>\n    <div class="winner">\n      <h2>Winner: <span class="name">{{winner || \'Sorry!\'}}</span></h2>\n    </div>\n    <div class="sticky-footer">\n      <!-- Retry -->\n      <button class="retry" ion-button icon-left full color="light" (click)="retry()">\n        <ion-icon name="refresh"></ion-icon>\n        Retry\n      </button>\n      <div class="button-spacer"></div>\n      <!-- New Giveaway -->\n      <button ion-button class="new-giveaway" icon-left full (click)="newGiveaway()">\n        <ion-icon name="list"></ion-icon>\n        New Giveaway\n      </button>\n    </div>\n  </div>\n</ion-content>\n'/*ion-inline-end:"/Users/Josh/Development/public_html/giveaway_picker/src/pages/home/home.html"*/
+        selector: 'page-home',template:/*ion-inline-start:"/Users/Josh/Development/localhost/giveaway-picker/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Giveaway Picker</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <!-- Spinner -->\n  <div class="spinner-container" *ngIf="loading">\n    <ion-spinner></ion-spinner>\n  </div>\n\n  <div class="section" *ngIf="!showWinner && !loading">\n    <div class="header">\n      <h2>Participants: {{checkParticipants(rows)}}</h2>\n      <!-- Add Rows -->\n      <button ion-button color="secondary" (click)="newApplicant(rows)">\n        <ion-icon name="add"></ion-icon>\n      </button>\n    </div>\n\n    <!-- Enter Applicants -->\n    <ion-list>\n      <ion-item-sliding *ngFor="let row of rows; let i = index">\n        <ion-item>\n          <ion-row>\n            <ion-col col-4>\n              <input type="number" [(ngModel)]="row.entries" placeholder="Entries" (input)="newApplicant(rows)">\n            </ion-col>\n            <ion-col col-8>\n              <input type="text" [(ngModel)]="row.name" placeholder="Name" (input)="newApplicant(rows)">\n            </ion-col>\n          </ion-row>\n        </ion-item>\n        <ion-item-options side="left">\n          <button ion-button color="primary" (click)="increaseEntry(row)">\n            <ion-icon name="add"></ion-icon>\n            Add\n          </button>\n          <button ion-button color="light" (click)="decreaseEntry(row)">\n            <ion-icon name="remove"></ion-icon>\n            Subtract\n          </button>\n        </ion-item-options>\n        <ion-item-options side="right">\n          <button ion-button color="danger" (click)="remove(i)">\n            <ion-icon name="trash"></ion-icon>\n            Remove\n          </button>\n        </ion-item-options>\n      </ion-item-sliding>\n    </ion-list>\n\n    <!-- Submit Entries -->\n    <!-- <div class="sticky-footer"> -->\n      <button ion-button icon-left full (click)="submit(rows)" [disabled]="checkValid(rows)">\n        <ion-icon name="send"></ion-icon>\n        Pick One!\n      </button>\n    <!-- </div> -->\n  </div>\n  <div class="section" *ngIf="showWinner && !loading">\n    <!-- Save Giveaway -->\n    <button ion-button icon-left float-right color="secondary" (click)="saveGiveaway(rows)" *ngIf="false">\n      <ion-icon name="download"></ion-icon>\n      Save Giveaway\n    </button>\n    <div class="winner">\n      <h2>Winner: <span class="name">{{winner || \'Sorry!\'}}</span></h2>\n    </div>\n    <div class="sticky-footer">\n      <!-- Retry -->\n      <button class="retry" ion-button icon-left full color="light" (click)="retry()">\n        <ion-icon name="refresh"></ion-icon>\n        Retry\n      </button>\n      <div class="button-spacer"></div>\n      <!-- New Giveaway -->\n      <button ion-button class="new-giveaway" icon-left full (click)="newGiveaway()">\n        <ion-icon name="list"></ion-icon>\n        New Giveaway\n      </button>\n    </div>\n  </div>\n</ion-content>\n'/*ion-inline-end:"/Users/Josh/Development/localhost/giveaway-picker/src/pages/home/home.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_splash_screen__["a" /* SplashScreen */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__ionic_native_splash_screen__["a" /* SplashScreen */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__ionic_native_splash_screen__["a" /* SplashScreen */]) === "function" && _b || Object])
 ], HomePage);
 
+var _a, _b;
 //# sourceMappingURL=home.js.map
 
 /***/ }),
@@ -55986,7 +55992,7 @@ var ViewGiveawaysPage = (function () {
 }());
 ViewGiveawaysPage = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_5" /* Component */])({
-        selector: 'page-list',template:/*ion-inline-start:"/Users/Josh/Development/public_html/giveaway_picker/src/pages/view-giveaways/view-giveaways.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>List</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n  <ion-list>\n    <button ion-item *ngFor="let giveaway of giveaways | async">\n      {{item.date}}\n    </button>\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"/Users/Josh/Development/public_html/giveaway_picker/src/pages/view-giveaways/view-giveaways.html"*/
+        selector: 'page-list',template:/*ion-inline-start:"/Users/Josh/Development/localhost/giveaway-picker/src/pages/view-giveaways/view-giveaways.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>List</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n  <ion-list>\n    <button ion-item *ngFor="let giveaway of giveaways | async">\n      {{item.date}}\n    </button>\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"/Users/Josh/Development/localhost/giveaway-picker/src/pages/view-giveaways/view-giveaways.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */]])
 ], ViewGiveawaysPage);
@@ -74484,17 +74490,17 @@ var AppModule = (function () {
 AppModule = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_core__["a" /* NgModule */])({
         declarations: [
-            __WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* MyApp */],
+            __WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* GiveawayPicker */],
             __WEBPACK_IMPORTED_MODULE_4__pages_home_home__["a" /* HomePage */],
             __WEBPACK_IMPORTED_MODULE_5__pages_view_giveaways_view_giveaways__["a" /* ViewGiveawaysPage */]
         ],
         imports: [
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
-            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* MyApp */]),
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* GiveawayPicker */]),
         ],
         bootstrap: [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["b" /* IonicApp */]],
         entryComponents: [
-            __WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* MyApp */],
+            __WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* GiveawayPicker */],
             __WEBPACK_IMPORTED_MODULE_4__pages_home_home__["a" /* HomePage */],
             __WEBPACK_IMPORTED_MODULE_5__pages_view_giveaways_view_giveaways__["a" /* ViewGiveawaysPage */]
         ],
@@ -74705,7 +74711,7 @@ var platformBrowserDynamic = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(48);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(100);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_view_giveaways_view_giveaways__ = __webpack_require__(101);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyApp; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return GiveawayPicker; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -74721,8 +74727,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var MyApp = (function () {
-    function MyApp(platform, statusBar, splashScreen) {
+// import { Deploy } from '@ionic/cloud-angular';
+var GiveawayPicker = (function () {
+    // constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public deploy: Deploy) {
+    function GiveawayPicker(platform, statusBar, splashScreen) {
         this.platform = platform;
         this.statusBar = statusBar;
         this.splashScreen = splashScreen;
@@ -74734,7 +74742,7 @@ var MyApp = (function () {
             { title: 'View Giveaways', component: __WEBPACK_IMPORTED_MODULE_5__pages_view_giveaways_view_giveaways__["a" /* ViewGiveawaysPage */] }
         ];
     }
-    MyApp.prototype.initializeApp = function () {
+    GiveawayPicker.prototype.initializeApp = function () {
         var _this = this;
         this.platform.ready().then(function () {
             // Okay, so the platform is ready and our plugins are available.
@@ -74743,22 +74751,22 @@ var MyApp = (function () {
             _this.splashScreen.hide();
         });
     };
-    MyApp.prototype.openPage = function (page) {
+    GiveawayPicker.prototype.openPage = function (page) {
         // Reset the content nav to have just this page
         // we wouldn't want the back button to show in this scenario
         this.nav.setRoot(page.component);
     };
-    return MyApp;
+    return GiveawayPicker;
 }());
 __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_9" /* ViewChild */])(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Nav */]),
     __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Nav */])
-], MyApp.prototype, "nav", void 0);
-MyApp = __decorate([
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_5" /* Component */])({template:/*ion-inline-start:"/Users/Josh/Development/public_html/giveaway_picker/src/app/app.html"*/'<!-- <ion-menu [content]="content">\n  <ion-header>\n    <ion-toolbar>\n      <ion-title>Menu</ion-title>\n    </ion-toolbar>\n  </ion-header>\n\n  <ion-content>\n    <ion-list>\n      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">\n        {{p.title}}\n      </button>\n    </ion-list>\n  </ion-content>\n\n</ion-menu> -->\n\n<!-- Disable swipe-to-go-back because it\'s poor UX to combine STGB with side menus -->\n<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>\n'/*ion-inline-end:"/Users/Josh/Development/public_html/giveaway_picker/src/app/app.html"*/
+], GiveawayPicker.prototype, "nav", void 0);
+GiveawayPicker = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_5" /* Component */])({template:/*ion-inline-start:"/Users/Josh/Development/localhost/giveaway-picker/src/app/app.html"*/'<!-- <ion-menu [content]="content">\n  <ion-header>\n    <ion-toolbar>\n      <ion-title>Menu</ion-title>\n    </ion-toolbar>\n  </ion-header>\n\n  <ion-content>\n    <ion-list>\n      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">\n        {{p.title}}\n      </button>\n    </ion-list>\n  </ion-content>\n\n</ion-menu> -->\n\n<!-- Disable swipe-to-go-back because it\'s poor UX to combine STGB with side menus -->\n<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>\n'/*ion-inline-end:"/Users/Josh/Development/localhost/giveaway-picker/src/app/app.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]])
-], MyApp);
+], GiveawayPicker);
 
 //# sourceMappingURL=app.component.js.map
 

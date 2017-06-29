@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
-import { MyApp } from './app.component';
+import { GiveawayPicker } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ViewGiveawaysPage } from '../pages/view-giveaways/view-giveaways';
 
@@ -26,19 +26,19 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 @NgModule({
   declarations: [
-    MyApp,
+    GiveawayPicker,
     HomePage,
     ViewGiveawaysPage
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(GiveawayPicker),
     // AngularFireModule.initializeApp(firebaseConfig),
     // AngularFireDatabaseModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp,
+    GiveawayPicker,
     HomePage,
     ViewGiveawaysPage
   ],

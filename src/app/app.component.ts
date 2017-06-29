@@ -5,17 +5,19 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
 import { ViewGiveawaysPage } from '../pages/view-giveaways/view-giveaways';
+// import { Deploy } from '@ionic/cloud-angular';
 
 @Component({
   templateUrl: 'app.html'
 })
-export class MyApp {
+export class GiveawayPicker {
   @ViewChild(Nav) nav: Nav;
 
   rootPage: any = HomePage;
 
   pages: Array<{title: string, component: any}>;
 
+  // constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public deploy: Deploy) {
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
 

@@ -38,5 +38,13 @@
         },
         "is_top_level": true,
         "variables": {}
+    },
+    "ionic-plugin-deploy": {
+        "source": {
+            "type": "registry",
+            "id": "ionic-plugin-deploy@^0.6.7"
+        },
+        "is_top_level": true,
+        "variables": {}
     }
 }

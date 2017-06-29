@@ -21,7 +21,7 @@ export class HomePage {
   }
 
   newApplicant(rows) {
-    if (this.checkRows(rows)) {
+    if (!this.checkRows(rows)) {
       rows.push({});
     }
   }
@@ -37,11 +37,16 @@ export class HomePage {
   }
 
   checkRows(rows) {
-    if (rows.length === 0) {
-      return true;
-    }
     for (let i = 0; i < rows.length; i++) {
-      if ((rows[i].name !== '' && rows[i].entries === '') || (rows[i].name === '' && rows[i].entries !== '') || (rows[i].name === null && rows[i].entries !== null) || (rows[i].name !== null && rows[i].entries === null) || (rows[i].name === undefined && rows[i].entries !== undefined) || (rows[i].name !== undefined && rows[i].entries === undefined)) {
+      if (rows[i].name === '' || rows[i].entries === '' || rows[i].name === null || rows[i].entries === null || rows[i].name === undefined || rows[i].entries === undefined) {
+        return true;
+      }
+    }
+  }
+
+  checkValid(rows) {
+    for (let i = 0; i < rows.length; i++) {
+      if ((rows[i].name === '' && rows[i].entries !== '') || (rows[i].name === null && rows[i].entries !== null) || (rows[i].name === undefined && rows[i].entries !== undefined) || (rows[i].name !== '' && rows[i].entries === '') || (rows[i].name !== null && rows[i].entries === null) || (rows[i].name !== undefined && rows[i].entries === undefined)) {
         return true;
       }
     }
